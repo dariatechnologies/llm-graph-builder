@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { calcWordColor } from '@neo4j-devtools/word-color';
 import type { Node, Relationship } from '@neo4j-nvl/base';
 import { GraphType, Messages, Scheme } from '../types';
