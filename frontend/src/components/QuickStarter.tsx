@@ -1,3 +1,4 @@
+//@ts-nocheck
 import Header from './Layout/Header';
 import React, { useState } from 'react';
 import { ThemeWrapperContext } from '../context/ThemeWrapper';

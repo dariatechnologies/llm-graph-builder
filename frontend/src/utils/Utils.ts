@@ -201,7 +201,7 @@ export const filterData = (
     // Document + Entity
     // @ts-ignore
     filteredNodes = allNodes.filter(
-      (node) =>
+      (node:any) =>
         node.labels.includes('Document') || (!node.labels.includes('Document') && !node.labels.includes('Chunk'))
     );
     // @ts-ignore

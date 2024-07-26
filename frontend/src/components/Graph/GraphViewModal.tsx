@@ -242,7 +242,7 @@ const GraphViewModal: React.FunctionComponent<GraphViewModalProps> = ({
   };
 
   // handle dropdown value change and call the init graph method
-  const handleDropdownChange = (selectedOption: OptionType | null | void) => {
+  const handleDropdownChange = (selectedOption: OptionType | null | void |any) => {
     if (selectedOption?.value) {
       const selectedValue = selectedOption.value;
       let newGraphType: GraphType[] = [];

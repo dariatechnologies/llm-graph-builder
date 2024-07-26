@@ -27,7 +27,7 @@ export default function GenericModal({
   isOnlyWeb?: boolean;
 }) {
   const themeUtils = useContext(ThemeWrapperContext);
-  const [activeTab, setactiveTab] = useState<number>(isOnlyYoutube ? 0 : isOnlyWikipedia ? 1 : isOnlyWeb ? 2 : 0);
+  const [activeTab, setactiveTab] = useState<number | any>(isOnlyYoutube ? 0 : isOnlyWikipedia ? 1 : isOnlyWeb ? 2 : 0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (

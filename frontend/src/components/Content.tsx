@@ -128,7 +128,7 @@ const Content: React.FC<ContentProps> = ({
     });
   }, [model]);
 
-  const handleDropdownChange = (selectedOption: OptionType | null | void) => {
+  const handleDropdownChange = (selectedOption: OptionType | null | void | any) => {
     if (selectedOption?.value) {
       setModel(selectedOption?.value);
     }

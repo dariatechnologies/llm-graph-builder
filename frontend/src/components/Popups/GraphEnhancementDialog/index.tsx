@@ -41,7 +41,7 @@ export default function GraphEnhancementDialog({
     closeSettingModal()
   }, [])
   
-  const [activeTab, setactiveTab] = useState<number>(0);
+  const [activeTab, setactiveTab] = useState<number | any>(0);
   return (
     <Dialog
       modalProps={{
