@@ -6,5 +6,13 @@
       "password": "Xl7pzg8DOivrA6VEyFBAK0mapCyUpK3wG949N6AZaNY",
       "database": "neo4j"
     }
+  },
+  {
+    "d8e9cd31-df6f-424e-ba23-d8172729ffb8": {
+      "uri": "neo4j+s://f098fc4e.databases.neo4j.io:7687",
+      "user": "neo4j",
+      "password": "IJygeqLnz9-RoVHN2WO1WOHdMpDjh2h7wTb96pFpISE",
+      "database": "neo4j"
+    }
   }
 ]
