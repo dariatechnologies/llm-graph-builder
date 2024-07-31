@@ -4,6 +4,7 @@ import connectAPI from '../../../services/ConnectAPI';
 import { useCredentials } from '../../../context/UserCredentials';
 import { useSearchParams } from 'react-router-dom';
 import { buttonCaptions } from '../../../utils/Constants';
+import { connectionUri } from '../../../utils/Utils';
 
 interface Message {
   type: 'success' | 'info' | 'warning' | 'danger' | 'unknown';
@@ -17,13 +18,20 @@ interface ConnectionModalProps {
 }
 
 export default function ConnectionModal({ open, setOpenConnection, setConnectionStatus }: ConnectionModalProps) {
-  let prefilledconnection = localStorage.getItem('neo4j.connection');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  let uuid = searchParams.get('uuid') as string;
+  let dbConnections = connectionUri(uuid);
+
+  // let prefilledconnection = localStorage.getItem('neo4j.connection');
+  // let prefilledconnection = undefined;
   let initialuri;
   let initialdb;
   let initialusername;
   let initialport;
   let initialprotocol;
-  if (prefilledconnection) {
+  if (dbConnections !== null) {
+    let prefilledconnection = JSON.stringify(dbConnections);
     let parsedcontent = JSON.parse(prefilledconnection);
     let urisplit = parsedcontent?.uri?.split('://');
     initialuri = urisplit[1];
@@ -42,7 +50,6 @@ export default function ConnectionModal({ open, setOpenConnection, setConnection
   const [connectionMessage, setMessage] = useState<Message | null>({ type: 'unknown', content: '' });
   const { setUserCredentials } = useCredentials();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     if (searchParams.has('connectURL')) {
@@ -131,6 +138,7 @@ export default function ConnectionModal({ open, setOpenConnection, setConnection
     setUserCredentials({ uri: connectionURI, userName: username, password: password, database: database, port: port });
     setIsLoading(true);
     const response = await connectAPI(connectionURI, username, password, database);
+    console.log(response, 'response12');
     if (response?.data?.status === 'Success') {
       localStorage.setItem(
         'neo4j.connection',
@@ -165,7 +173,8 @@ export default function ConnectionModal({ open, setOpenConnection, setConnection
     <>
       <Dialog
         size='small'
-        open={open}
+        // open={open}
+        open={false}
         aria-labelledby='form-dialog-title'
         onClose={() => {
           setOpenConnection(false);

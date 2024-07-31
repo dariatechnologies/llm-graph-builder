@@ -2,7 +2,7 @@
 import { calcWordColor } from '@neo4j-devtools/word-color';
 import type { Node, Relationship } from '@neo4j-nvl/base';
 import { GraphType, Messages, Scheme } from '../types';
-
+import dbUris from '../../src/assets/dbUris.json'
 // Get the Url
 export const url = () => {
   let url = window.location.href.replace('5173', '8000');
@@ -202,7 +202,7 @@ export const filterData = (
     // Document + Entity
     // @ts-ignore
     filteredNodes = allNodes.filter(
-      (node:any) =>
+      (node: any) =>
         node.labels.includes('Document') || (!node.labels.includes('Document') && !node.labels.includes('Chunk'))
     );
     // @ts-ignore
@@ -251,4 +251,16 @@ export const calculateProcessingTime = (fileSizeBytes: number, processingTimePer
 
 export const capitalize = (word: string): string => {
   return `${word[0].toUpperCase()}${word.slice(1)}`;
+};
+
+
+export const connectionUri = (key: string) => {
+  for (const connection of dbUris) {
+    //@ts-ignore
+    if (connection[key]) {
+      //@ts-ignore
+      return connection[key];
+    }
+  }
+  return null;
 };

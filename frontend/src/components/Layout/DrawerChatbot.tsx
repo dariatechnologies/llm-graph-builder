@@ -1,4 +1,4 @@
-import { Drawer } from '@neo4j-ndl/react';
+// import { Drawer } from '@neo4j-ndl/react';
 import Chatbot from '../ChatBot/Chatbot';
 import { Messages } from '../../types';
 import { useMessageContext } from '../../context/UserMessages';
@@ -7,7 +7,7 @@ interface DrawerChatbotProps {
   clearHistoryData: boolean;
   messages: Messages[];
 }
-const DrawerChatbot: React.FC<DrawerChatbotProps> = ({ isExpanded, clearHistoryData, messages }) => {
+const DrawerChatbot: React.FC<DrawerChatbotProps> = ({ /* isExpanded, */ clearHistoryData, messages }) => {
   const { setMessages } = useMessageContext();
 
   const getIsLoading = (messages: Messages[]) => {
@@ -15,8 +15,8 @@ const DrawerChatbot: React.FC<DrawerChatbotProps> = ({ isExpanded, clearHistoryD
   };
   return (
     <div className='flex min-h-[calc(-58px+100vh)] relative'>
-      <Drawer expanded={isExpanded} closeable={false} position='right' type='push' className='!pt-0'>
-        <Drawer.Body className='!overflow-hidden !pr-0'>
+      {/* <Drawer expanded={isExpanded} closeable={false} position='right' type='push' className='!pt-0'> */}
+        {/* <Drawer.Body className='!overflow-hidden !pr-0'> */}
           <Chatbot
             isFullScreen={false}
             messages={messages}
@@ -24,8 +24,8 @@ const DrawerChatbot: React.FC<DrawerChatbotProps> = ({ isExpanded, clearHistoryD
             clear={clearHistoryData}
             isLoading={getIsLoading(messages)}
           />
-        </Drawer.Body>
-      </Drawer>
+        {/* </Drawer.Body> */}
+      {/* </Drawer> */}
     </div>
   );
 };

@@ -3,6 +3,7 @@ import Header from './Layout/Header';
 import React, { useState } from 'react';
 import { ThemeWrapperContext } from '../context/ThemeWrapper';
 import PageLayout from './Layout/PageLayout';
+import Layout from './Layout/Layout';
 import { FileContextProvider } from '../context/UsersFiles';
 import UserCredentialsWrapper from '../context/UserCredentials';
 import AlertContextWrapper from '../context/Alert';
@@ -37,8 +38,8 @@ const QuickStarter: React.FunctionComponent = () => {
       <FileContextProvider>
         <MessageContextWrapper>
           <AlertContextWrapper>
-            <Header themeMode={themeMode} toggleTheme={toggleColorMode} />
-            <PageLayout
+            {/* <Header themeMode={themeMode} toggleTheme={toggleColorMode} /> */}
+            <Layout
               openSettingsDialog={openSettingsModal}
               isSettingPanelExpanded={showSettingsModal}
               closeSettingModal={closeSettingModal}
@@ -46,6 +47,14 @@ const QuickStarter: React.FunctionComponent = () => {
               showOrphanNodeDeletionModal={showOrphanNodeDeletionDialog}
               openOrphanNodeDeletionModal={openOrphanNodeDeletionModal}
             />
+            {/* <PageLayout
+              openSettingsDialog={openSettingsModal}
+              isSettingPanelExpanded={showSettingsModal}
+              closeSettingModal={closeSettingModal}
+              closeOrphanNodeDeletionModal={closeOrphanNodeDeletionModal}
+              showOrphanNodeDeletionModal={showOrphanNodeDeletionDialog}
+              openOrphanNodeDeletionModal={openOrphanNodeDeletionModal}
+            /> */}
           </AlertContextWrapper>
         </MessageContextWrapper>
       </FileContextProvider>

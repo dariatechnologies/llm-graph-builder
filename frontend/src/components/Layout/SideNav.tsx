@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Dialog, SideNavigation, Tip } from '@neo4j-ndl/react';
 import {
-  ArrowRightIconOutline,
-  ArrowLeftIconOutline,
+  // ArrowRightIconOutline,
+  // ArrowLeftIconOutline,
   TrashIconOutline,
-  ArrowsPointingOutIconOutline,
-  ChatBubbleOvalLeftEllipsisIconOutline,
-  CloudArrowUpIconSolid,
+  // ArrowsPointingOutIconOutline,
+  // ChatBubbleOvalLeftEllipsisIconOutline,
+  // CloudArrowUpIconSolid,
 } from '@neo4j-ndl/react/icons';
 import { SideNavProps } from '../../types';
 import Chatbot from '../ChatBot/Chatbot';
@@ -15,13 +15,13 @@ import { useMessageContext } from '../../context/UserMessages';
 import { getIsLoading } from '../../utils/Utils';
 import ExpandedChatButtonContainer from '../ChatBot/ExpandedChatButtonContainer';
 import { tooltips } from '../../utils/Constants';
-import ChatModeToggle from '../ChatBot/ChatModeToggle';
-import { RiChatSettingsLine } from 'react-icons/ri';
-import IconButtonWithToolTip from '../UI/IconButtonToolTip';
+// import ChatModeToggle from '../ChatBot/ChatModeToggle';
+// import { RiChatSettingsLine } from 'react-icons/ri';
+// import IconButtonWithToolTip from '../UI/IconButtonToolTip';
 
 const SideNav: React.FC<SideNavProps> = ({
   position,
-  toggleDrawer,
+  // toggleDrawer,
   isExpanded,
   deleteOnClick,
   setShowDrawerChatbot,
@@ -32,8 +32,8 @@ const SideNav: React.FC<SideNavProps> = ({
   const [isChatModalOpen, setIsChatModalOpen] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const { setMessages } = useMessageContext();
-  const [chatModeAnchor, setchatModeAnchor] = useState<HTMLElement | null>(null);
-  const [showChatMode, setshowChatMode] = useState<boolean>(false);
+  // const [chatModeAnchor, setchatModeAnchor] = useState<HTMLElement | null>(null);
+  // const [showChatMode, setshowChatMode] = useState<boolean>(false);
   const date = new Date();
   useEffect(() => {
     if (clearHistoryData) {
@@ -49,14 +49,14 @@ const SideNav: React.FC<SideNavProps> = ({
     }
   }, [clearHistoryData]);
 
-  const handleExpandClick = () => {
-    setIsChatModalOpen(true);
-    setIsFullScreen(true);
-    if (setShowDrawerChatbot && setIsRightExpanded) {
-      setShowDrawerChatbot(false);
-      setIsRightExpanded(false);
-    }
-  };
+  // const handleExpandClick = () => {
+  //   setIsChatModalOpen(true);
+  //   setIsFullScreen(true);
+  //   if (setShowDrawerChatbot && setIsRightExpanded) {
+  //     setShowDrawerChatbot(false);
+  //     setIsRightExpanded(false);
+  //   }
+  // };
   const handleShrinkClick = () => {
     setIsChatModalOpen(false);
     setIsFullScreen(false);
@@ -65,14 +65,14 @@ const SideNav: React.FC<SideNavProps> = ({
       setIsRightExpanded(true);
     }
   };
-  const handleClick = () => {
-    toggleDrawer();
-  };
+  // const handleClick = () => {
+  //   toggleDrawer();
+  // };
   return (
-    <div style={{ height: 'calc(100vh - 58px)', minHeight: '200px', display: 'flex' }}>
+    <div style={{ height: 'calc(100vh - 58px)', minHeight: '200px', display: 'flex'}}>
       <SideNavigation iconMenu={true} expanded={false} position={position}>
         <SideNavigation.List>
-          <SideNavigation.Item
+          {/* <SideNavigation.Item
             onClick={handleClick}
             icon={
               isExpanded ? (
@@ -101,7 +101,7 @@ const SideNav: React.FC<SideNavProps> = ({
                 </>
               )
             }
-          />
+          /> */}
 
           {position === 'right' && isExpanded && (
             <>
@@ -118,7 +118,7 @@ const SideNav: React.FC<SideNavProps> = ({
                   }
                 />
               </Tip>
-              <Tip allowedPlacements={['left']}>
+              {/* <Tip allowedPlacements={['left']}>
                 <SideNavigation.Item
                   onClick={handleExpandClick}
                   icon={
@@ -130,8 +130,8 @@ const SideNav: React.FC<SideNavProps> = ({
                     </>
                   }
                 />
-              </Tip>
-              {!isChatModalOpen && (
+              </Tip> */}
+              {/* {!isChatModalOpen && (
                 <SideNavigation.Item
                   onClick={(e) => {
                     setchatModeAnchor(e.currentTarget);
@@ -151,7 +151,7 @@ const SideNav: React.FC<SideNavProps> = ({
                     </>
                   }
                 ></SideNavigation.Item>
-              )}
+              )} */}
             </>
           )}
         </SideNavigation.List>

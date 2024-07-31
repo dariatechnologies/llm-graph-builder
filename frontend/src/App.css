@@ -26,8 +26,9 @@
 
 .contentWithExpansion {
   width: calc(-840px + 100dvw);
-  height: calc(100dvh - 58px);
+  /* height: calc(100dvh - 58px); */
   padding: 3px;
+  padding-bottom: 20px ;
   display: flex;
   flex-direction: column;
   align-items: center;

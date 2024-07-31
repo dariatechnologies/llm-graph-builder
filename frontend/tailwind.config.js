@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'primary': '#ff8552',
+        'secondary': '#fff8f5',
+      },
+    },
   },
   plugins: [],
   presets:[require('@neo4j-ndl/base').tailwindConfig],

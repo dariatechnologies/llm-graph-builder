@@ -1,4 +1,4 @@
-import { Drawer, Flex, StatusIndicator, Typography } from '@neo4j-ndl/react';
+import {/*  Drawer, */ Flex, /* StatusIndicator, Typography  */} from '@neo4j-ndl/react';
 import DropZone from '../DataSources/Local/DropZone';
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { healthStatus } from '../../services/HealthStatus';
@@ -63,11 +63,12 @@ const DrawerDropzone: React.FC<DrawerProps> = ({ isExpanded }) => {
     () => APP_SOURCES?.includes('web') && !APP_SOURCES.includes('youtube') && !APP_SOURCES.includes('wiki'),
     [APP_SOURCES]
   );
-
+  console.log(isBackendConnected,isExpanded)
   return (
-    <div className='flex min-h-[calc(-58px+100vh)] relative'>
-      <Drawer expanded={isExpanded} position='left' type='push' closeable={false}>
-        <Drawer.Body className={`!overflow-hidden !w-[294px]`} style={{ height: 'intial' }}>
+    // <div className='flex min-h-[calc(-58px+100vh)] relative'>
+    <div className='flex h-44 relative  '>
+      {/* <Drawer expanded={isExpanded} position='left' type='push' closeable={false}> */}
+        {/* <Drawer.Body className={`!overflow-hidden !w-[294px]`} style={{ height: 'intial' }}> */}
           {alertState.showAlert && (
             <CustomAlert
               severity={alertState.alertType}
@@ -76,11 +77,11 @@ const DrawerDropzone: React.FC<DrawerProps> = ({ isExpanded }) => {
               alertMessage={alertState.alertMessage}
             />
           )}
-          <div className='flex h-full flex-col'>
-            <div className='relative h-full'>
-              <div className='flex flex-col h-full'>
-                <div
-                  className={`mx-6 flex flex-none items-center justify-between ${
+          <div className='flex h-full flex-col justify-center w-full'>
+            <div className='relative h-full '>
+              <div className='flex flex-col h-full '>
+                {/* <div
+                  className={`mx-6 flex flex-none items-center justify-between  ${
                     process.env.ENV != 'PROD' ? 'pb-6' : 'pb-5'
                   }`}
                 >
@@ -92,12 +93,12 @@ const DrawerDropzone: React.FC<DrawerProps> = ({ isExpanded }) => {
                       <span>Backend connection status</span>
                     </Typography>
                   )}
-                </div>
+                </div> */}
                 {process.env.ENV != 'PROD' ? (
                   <>
                     <Flex gap='6' className='h-full source-container'>
                       {APP_SOURCES != undefined && APP_SOURCES.includes('local') && (
-                        <div className='px-6 outline-dashed outline-2 outline-offset-2 outline-gray-100 imageBg'>
+                        <div className='px-6  outline-dashed outline-2 outline-offset-2 outline-gray-100 imageBg '>
                           <DropZone />
                         </div>
                       )}
@@ -183,8 +184,8 @@ const DrawerDropzone: React.FC<DrawerProps> = ({ isExpanded }) => {
               </div>
             </div>
           </div>
-        </Drawer.Body>
-      </Drawer>
+        {/* </Drawer.Body> */}
+      {/* </Drawer> */}
     </div>
   );
 };

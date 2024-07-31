@@ -1,0 +1,10 @@
+[
+  {
+    "aab8a855-a71e-4bde-98d4-2da5b6ec4cb2": {
+      "uri": "neo4j+s://2e44a677.databases.neo4j.io:7687",
+      "user": "neo4j",
+      "password": "Xl7pzg8DOivrA6VEyFBAK0mapCyUpK3wG949N6AZaNY",
+      "database": "neo4j"
+    }
+  }
+]

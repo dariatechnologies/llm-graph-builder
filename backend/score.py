@@ -165,6 +165,14 @@ async def extract_knowledge_graph_from_file(
           Nodes and Relations created in Neo4j databse for the pdf file
     """
     try:
+        if uri is None:
+            uri=os.environ.get('NEO4J_URI')
+        if userName is None:
+             userName=os.environ.get('NEO4J_USERNAME')
+        if password is None:
+            password=os.environ.get('NEO4J_PASSWORD')
+        if database is None:
+            database=os.environ.get('NEO4J_DATABASE')
         graph = create_graph_database_connection(uri, userName, password, database)   
         graphDb_data_Access = graphDBdataAccess(graph)
         if source_type == 'local file':

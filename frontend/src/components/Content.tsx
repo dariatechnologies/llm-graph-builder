@@ -23,7 +23,7 @@ import GraphViewModal from './Graph/GraphViewModal';
 import GraphEnhancementDialog from './Popups/GraphEnhancementDialog';
 import { OverridableStringUnion } from '@mui/types';
 import { AlertColor, AlertPropsColorOverrides } from '@mui/material';
-
+import { connectionUri } from '../utils/Utils';
 const Content: React.FC<ContentProps> = ({
   isLeftExpanded,
   isRightExpanded,
@@ -32,7 +32,7 @@ const Content: React.FC<ContentProps> = ({
   setIsSchema,
   showEnhancementDialog,
   setshowEnhancementDialog,
-  closeSettingModal
+  closeSettingModal,
 }) => {
   const [init, setInit] = useState<boolean>(false);
   const [openConnection, setOpenConnection] = useState<boolean>(false);
@@ -52,9 +52,9 @@ const Content: React.FC<ContentProps> = ({
     model,
     selectedNodes,
     selectedRels,
-    setSelectedNodes,
+    // setSelectedNodes,
     setRowSelection,
-    setSelectedRels,
+    // setSelectedRels,
   } = useFileContext();
   const [viewPoint, setViewPoint] = useState<'tableView' | 'showGraphView' | 'chatInfoView'>('tableView');
   const [showDeletePopUp, setshowDeletePopUp] = useState<boolean>(false);
@@ -82,6 +82,9 @@ const Content: React.FC<ContentProps> = ({
       });
     }
   );
+
+  let uuid = searchParams.get('uuid') as string;
+  let dbConnections = connectionUri(uuid);
   const childRef = useRef<ChildRef>(null);
   const openGraphEnhancementDialog = () => {
     setshowEnhancementDialog(true);
@@ -101,8 +104,11 @@ const Content: React.FC<ContentProps> = ({
   };
   useEffect(() => {
     if (!init && !searchParams.has('connectURL')) {
-      let session = localStorage.getItem('neo4j.connection');
-      if (session) {
+      console.log('connectURL not found');
+      // let session = localStorage.getItem('neo4j.connection');
+      // if (session) {
+      if (dbConnections != null) {
+        let session = JSON.stringify(dbConnections);
         let neo4jConnection = JSON.parse(session);
         setUserCredentials({
           uri: neo4jConnection.uri,
@@ -285,16 +291,16 @@ const Content: React.FC<ContentProps> = ({
     });
   };
 
-  const handleOpenGraphClick = () => {
-    const bloomUrl = process.env.BLOOM_URL;
-    const uriCoded = userCredentials?.uri.replace(/:\d+$/, '');
-    const connectURL = `${uriCoded?.split('//')[0]}//${userCredentials?.userName}@${uriCoded?.split('//')[1]}:${
-      userCredentials?.port ?? '7687'
-    }`;
-    const encodedURL = encodeURIComponent(connectURL);
-    const replacedUrl = bloomUrl?.replace('{CONNECT_URL}', encodedURL);
-    window.open(replacedUrl, '_blank');
-  };
+  // const handleOpenGraphClick = () => {
+  //   const bloomUrl = process.env.BLOOM_URL;
+  //   const uriCoded = userCredentials?.uri.replace(/:\d+$/, '');
+  //   const connectURL = `${uriCoded?.split('//')[0]}//${userCredentials?.userName}@${uriCoded?.split('//')[1]}:${
+  //     userCredentials?.port ?? '7687'
+  //   }`;
+  //   const encodedURL = encodeURIComponent(connectURL);
+  //   const replacedUrl = bloomUrl?.replace('{CONNECT_URL}', encodedURL);
+  //   window.open(replacedUrl, '_blank');
+  // };
 
   const classNameCheck =
     isLeftExpanded && isRightExpanded
@@ -305,18 +311,19 @@ const Content: React.FC<ContentProps> = ({
       ? 'w-[calc(100%-128px)]'
       : 'contentWithDropzoneExpansion';
 
+  console.log(classNameCheck, 'classNameCheck');
   const handleGraphView = () => {
     setOpenGraphView(true);
     setViewPoint('showGraphView');
   };
 
-  const disconnect = () => {
-    setConnectionStatus(false);
-    localStorage.removeItem('password');
-    setUserCredentials({ uri: '', password: '', userName: '', database: '' });
-    setSelectedNodes([]);
-    setSelectedRels([]);
-  };
+  // const disconnect = () => {
+  //   setConnectionStatus(false);
+  //   localStorage.removeItem('password');
+  //   setUserCredentials({ uri: '', password: '', userName: '', database: '' });
+  //   setSelectedNodes([]);
+  //   setSelectedRels([]);
+  // };
 
   const selectedfileslength = useMemo(
     () => childRef.current?.getSelectedRows().length,
@@ -408,17 +415,27 @@ const Content: React.FC<ContentProps> = ({
     }
     setshowDeletePopUp(false);
   };
+
   useEffect(() => {
-    const connection = localStorage.getItem('neo4j.connection');
-    if (connection != null) {
+    // const connection = localStorage.getItem('neo4j.connection');
+    if (dbConnections != null) {
+      const connection = JSON.stringify(dbConnections);
       (async () => {
         const parsedData = JSON.parse(connection);
-        console.log(parsedData.uri);
-        const response = await connectAPI(parsedData.uri, parsedData.user, parsedData.password, parsedData.database);
+        console.log(parsedData.uri, 'parsedData.uri', parsedData, parsedData.password);
+        // const response = await connectAPI(parsedData.uri, parsedData.user, parsedData.password, parsedData.database);
+        const response = await connectAPI(
+          'neo4j+s://2e44a677.databases.neo4j.io:7687',
+          'neo4j',
+          'Xl7pzg8DOivrA6VEyFBAK0mapCyUpK3wG949N6AZaNY',
+          'neo4j'
+        );
+        console.log(response, 'response');
         if (response?.data?.status === 'Success') {
           setConnectionStatus(true);
           setOpenConnection(false);
         } else {
+          console.log('elseeee');
           setOpenConnection(true);
           setConnectionStatus(false);
         }
@@ -601,23 +618,24 @@ const Content: React.FC<ContentProps> = ({
             setConnectionStatus={setConnectionStatus}
           />
           <div className='connectionstatus__container'>
-            <span className='h6 px-1'>Neo4j connection</span>
+            {/* <span className='h6 px-1'>Neo4j connection</span> */}
             <Typography variant='body-medium'>
               {!connectionStatus ? <StatusIndicator type='danger' /> : <StatusIndicator type='success' />}
               {connectionStatus ? (
-                <span className='n-body-small'>{userCredentials?.uri}</span>
+                // <span className='n-body-small'>{userCredentials?.uri}</span>
+                <span className='n-body-small'>Connected</span>
               ) : (
                 <span className='n-body-small'>Not Connected</span>
               )}
               <div className='pt-1'>
-                {!isSchema ? (
+                {/* {!isSchema ? (
                   <StatusIndicator type='danger' />
                 ) : selectedNodes.length || selectedRels.length ? (
                   <StatusIndicator type='success' />
                 ) : (
                   <StatusIndicator type='warning' />
-                )}
-                {isSchema ? (
+                )} */}
+                {/* {isSchema ? (
                   <span className='n-body-small'>
                     {(!selectedNodes.length || !selectedNodes.length) && 'Empty'} Graph Schema configured
                     {selectedNodes.length || selectedRels.length
@@ -626,23 +644,28 @@ const Content: React.FC<ContentProps> = ({
                   </span>
                 ) : (
                   <span className='n-body-small'>No Graph Schema configured</span>
-                )}
+                )} */}
               </div>
             </Typography>
           </div>
           <div>
-            <Button className='mr-2.5' onClick={openGraphEnhancementDialog} disabled={!connectionStatus}>
+            <Button
+              className='mr-2.5'
+              style={{ backgroundColor: connectionStatus ? '#ff8552' : '' }}
+              onClick={openGraphEnhancementDialog}
+              disabled={!connectionStatus}
+            >
               Graph Enhancement
             </Button>
-            {!connectionStatus ? (
-              <Button className='mr-2.5' onClick={() => setOpenConnection(true)}>
+            {/* {!connectionStatus ? (
+              <Button className='mr-2.5' onClick={() => setOpenConnection(true)} style={{ backgroundColor: '#ff8552' }}>
                 {buttonCaptions.connectToNeo4j}
               </Button>
             ) : (
-              <Button className='mr-2.5' onClick={disconnect}>
+              <Button className='mr-2.5' onClick={disconnect} style={{ backgroundColor: '#ff8552' }}>
                 {buttonCaptions.disconnect}
               </Button>
-            )}
+            )} */}
           </div>
         </Flex>
         <FileTable
@@ -659,7 +682,7 @@ const Content: React.FC<ContentProps> = ({
         <Flex
           className={`${
             !isLeftExpanded && !isRightExpanded ? 'w-[calc(100%-128px)]' : 'w-full'
-          } p-2.5 absolute bottom-4 mt-1.5 self-start`}
+          } p-2.5  mt-4  self-start `}
           justifyContent='space-between'
           flexDirection='row'
         >
@@ -693,7 +716,7 @@ const Content: React.FC<ContentProps> = ({
             >
               {buttonCaptions.showPreviewGraph} {selectedfileslength && completedfileNo ? `(${completedfileNo})` : ''}
             </ButtonWithToolTip>
-            <ButtonWithToolTip
+            {/* <ButtonWithToolTip
               text={tooltips.bloomGraph}
               placement='top'
               onClick={handleOpenGraphClick}
@@ -702,7 +725,7 @@ const Content: React.FC<ContentProps> = ({
               label='Open Graph with Bloom'
             >
               {buttonCaptions.exploreGraphWithBloom}
-            </ButtonWithToolTip>
+            </ButtonWithToolTip> */}
             <ButtonWithToolTip
               text={
                 !selectedfileslength ? tooltips.deleteFile : `${selectedfileslength} ${tooltips.deleteSelectedFiles}`
