@@ -34,8 +34,10 @@ import { OverridableStringUnion } from '@mui/types';
 import { useFileContext } from '../../context/UsersFiles';
 import SchemaFromTextDialog from '../Popups/Settings/SchemaFromText';
 import CustomAlert from '../UI/Alert';
+import { useSearchParams } from 'react-router-dom';
 
 import logo from '../../assets/images/logo.png';
+import { connectionUri } from '../../utils/Utils';
 
 const drawerWidth = 240;
 
@@ -121,7 +123,9 @@ export default function Layout({
   // const handleDrawerOpen = () => {
   //   setOpen(open);
   // };
-
+  const [searchParams] = useSearchParams();
+  let uuid = searchParams.get('uuid') as string;
+  let botName = connectionUri(uuid)?.name;
   const handleDrawerClose = () => {
     setOpen(!open);
   };
@@ -141,7 +145,7 @@ export default function Layout({
     alertMessage: '',
   });
 
-  const [selected, setSelected] = useState<string>('');
+  const [selected, setSelected] = useState<string>('Chat');
 
   const { messages } = useMessageContext();
   const { isSchema, setIsSchema, setShowTextFromSchemaDialog, showTextFromSchemaDialog } = useFileContext();
@@ -179,7 +183,7 @@ export default function Layout({
       alertMessage: '',
     });
   };
-  console.log(toggleLeftDrawer,"toggleLeftDrawer")
+  console.log(toggleLeftDrawer, 'toggleLeftDrawer');
   return (
     <Box sx={{ display: 'flex' }}>
       {/* <CssBaseline /> */}
@@ -245,42 +249,47 @@ export default function Layout({
               <ListItemText primary='Chat' sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          <ListItem
-            disablePadding
-            sx={{ display: 'block' }}
-            onClick={() => {
-              setSelected('Configurations');
-            }}
-            className={selected === 'Configurations' || selected === '' ? 'bg-primary' : ''}
-          >
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
+          {uuid === 'aab8a855-a71e-4bde-98d4-2da5b6ec4cb2' && (
+            <ListItem
+              disablePadding
+              sx={{ display: 'block' }}
+              onClick={() => {
+                setSelected('Configurations');
               }}
+              className={selected === 'Configurations' || selected === '' ? 'bg-primary' : ''}
             >
-              <ListItemIcon
+              <ListItemButton
                 sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : 'auto',
-                  justifyContent: 'center',
+                  minHeight: 48,
+                  justifyContent: open ? 'initial' : 'center',
+                  px: 2.5,
                 }}
               >
-                <SettingsSuggestIcon />
-              </ListItemIcon>
-              <ListItemText primary='Configurations' sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: open ? 3 : 'auto',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <SettingsSuggestIcon />
+                </ListItemIcon>
+                <ListItemText primary='Configurations' sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          )}
         </List>
       </Drawer>
 
       {/* <DrawerHeader /> */}
       {selected === 'Chat' ? (
-        <div style={{ marginTop: '58px' }} className='flex overflow-hidden m-auto !max-w-[1100px] !min-w-[1100px]'>
+        <div style={{ marginTop: '20px' }} className='flex overflow-hidden m-auto !max-w-[1100px] !min-w-[1100px]'>
           {' '}
           {showDrawerChatbot && (
-            <DrawerChatbot messages={messages} isExpanded={isRightExpanded} clearHistoryData={clearHistoryData} />
+            <div className='flex flex-col'>
+              <div className='text-3xl'>{botName}</div>
+              <DrawerChatbot messages={messages} isExpanded={isRightExpanded} clearHistoryData={clearHistoryData} />
+            </div>
           )}
           <SideNav
             messages={messages}

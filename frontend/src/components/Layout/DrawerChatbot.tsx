@@ -14,7 +14,7 @@ const DrawerChatbot: React.FC<DrawerChatbotProps> = ({ /* isExpanded, */ clearHi
     return messages.some((msg) => msg.isTyping || msg.isLoading);
   };
   return (
-    <div className='flex min-h-[calc(-58px+100vh)] relative'>
+    <div className='flex h-[calc(-58px+100vh)] relative'>
       {/* <Drawer expanded={isExpanded} closeable={false} position='right' type='push' className='!pt-0'> */}
         {/* <Drawer.Body className='!overflow-hidden !pr-0'> */}
           <Chatbot

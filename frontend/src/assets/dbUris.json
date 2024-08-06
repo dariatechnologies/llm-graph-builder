@@ -4,7 +4,8 @@
       "uri": "neo4j+s://2e44a677.databases.neo4j.io:7687",
       "user": "neo4j",
       "password": "Xl7pzg8DOivrA6VEyFBAK0mapCyUpK3wG949N6AZaNY",
-      "database": "neo4j"
+      "database": "neo4j",
+      "name":"Nvidia"
     }
   },
   {
@@ -20,7 +21,8 @@
       "uri": "neo4j+s://d6ae6541.databases.neo4j.io:7687",
       "user": "neo4j",
       "password": "gx-hEhev3Y3VHU9CrcBjN17XXj6bz1F70KtO4XO2zVA",
-      "database": "neo4j"
+      "database": "neo4j",
+      "name":"Haseeb T Hasan"
     }
   },
   {
@@ -28,7 +30,8 @@
       "uri": "neo4j+s://d6ae6541.databases.neo4j.io:7687",
       "user": "neo4j",
       "password": "gx-hEhev3Y3VHU9CrcBjN17XXj6bz1F70KtO4XO2zVA",
-      "database": "neo4j"
+      "database": "neo4j",
+      "name":"Daniel Sabanekh"
     }
   },
   {

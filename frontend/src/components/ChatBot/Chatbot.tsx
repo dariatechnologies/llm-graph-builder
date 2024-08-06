@@ -9,6 +9,7 @@ import {
 // import ChatBotAvatar from '../../assets/images/chatbot-ai.png';
 import logo from '../../assets/images/logo.png';
 import { ChatbotProps, CustomFile, UserCredentials, chunk } from '../../types';
+import { connectionUri } from '../../utils/Utils';
 import { useCredentials } from '../../context/UserCredentials';
 import { chatBotAPI } from '../../services/QnaAPI';
 import { v4 as uuidv4 } from 'uuid';
@@ -1120,9 +1121,17 @@ Answer: Quite Motivated
 always answer considering the above person's Biodata
 assistant:`;
       }
+      let dbConnections = connectionUri(uuid);
+      let _userCredentials = {
+        uri: dbConnections?.uri,
+        database: dbConnections?.database,
+        userName: dbConnections?.userName,
+        password: dbConnections?.password,
+      };
 
       const chatbotAPI = await chatBotAPI(
-        userCredentials as UserCredentials,
+        // userCredentials as UserCredentials,
+        _userCredentials as UserCredentials,
         inputMessage,
         sessionId,
         model,
@@ -1281,7 +1290,7 @@ assistant:`;
                       !chat.isLoading &&
                       !chat.isTyping && (
                         <div className='flex inline-block'>
-                          <ButtonWithToolTip
+                          {/* <ButtonWithToolTip
                             className='w-4 h-4 inline-block p-6 mt-1.5'
                             fill='text'
                             placement='top'
@@ -1303,7 +1312,7 @@ assistant:`;
                           >
                             {' '}
                             {buttonCaptions.details}
-                          </ButtonWithToolTip>
+                          </ButtonWithToolTip> */}
                           <IconButtonWithToolTip
                             label='copy text'
                             placement='top'
