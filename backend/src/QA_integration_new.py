@@ -160,6 +160,8 @@ def format_documents(documents, model):
 
 
 def get_rag_chain(llm, system_template=CHAT_SYSTEM_TEMPLATE):
+    if system_template is None:
+        system_template = CHAT_SYSTEM_TEMPLATE
     question_answering_prompt = ChatPromptTemplate.from_messages(
         [
             ("system", system_template),
