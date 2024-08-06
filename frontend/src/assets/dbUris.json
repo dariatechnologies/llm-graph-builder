@@ -14,5 +14,29 @@
       "password": "IJygeqLnz9-RoVHN2WO1WOHdMpDjh2h7wTb96pFpISE",
       "database": "neo4j"
     }
+  },
+  {
+    "41ae5bf1-fc3c-4802-8136-1ce28985aef4": {
+      "uri": "neo4j+s://d6ae6541.databases.neo4j.io:7687",
+      "user": "neo4j",
+      "password": "gx-hEhev3Y3VHU9CrcBjN17XXj6bz1F70KtO4XO2zVA",
+      "database": "neo4j"
+    }
+  },
+  {
+    "7ac1214c-d365-4f51-8094-ea286e28bca7": {
+      "uri": "neo4j+s://d6ae6541.databases.neo4j.io:7687",
+      "user": "neo4j",
+      "password": "gx-hEhev3Y3VHU9CrcBjN17XXj6bz1F70KtO4XO2zVA",
+      "database": "neo4j"
+    }
+  },
+  {
+    "90045fb1-e0dd-4414-91ff-9e6075c983e9": {
+      "uri": "neo4j+s://d6ae6541.databases.neo4j.io:7687",
+      "user": "neo4j",
+      "password": "gx-hEhev3Y3VHU9CrcBjN17XXj6bz1F70KtO4XO2zVA",
+      "database": "neo4j"
+    }
   }
 ]
