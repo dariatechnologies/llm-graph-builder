@@ -71,6 +71,15 @@
     }
   },
   {
+    "5ad3c8f7-246f-47f4-98b7-809217e3e7d1": {
+      "uri": "neo4j+s://d6ae6541.databases.neo4j.io:7687",
+      "user": "neo4j",
+      "password": "gx-hEhev3Y3VHU9CrcBjN17XXj6bz1F70KtO4XO2zVA",
+      "database": "neo4j",
+      "name":"Zaufyshan Hasan"
+    }
+  },
+  {
     "90045fb1-e0dd-4414-91ff-9e6075c983e9": {
       "uri": "neo4j+s://d6ae6541.databases.neo4j.io:7687",
       "user": "neo4j",
