@@ -48,10 +48,11 @@ export const llms =
         'anthropic_claude_3_5_sonnet',
         'fireworks_llama_v3_70b',
         'bedrock_claude_3_5_sonnet',
+        'openai-gpt-4o-mini'
       ];
 
-export const defaultLLM = llms?.includes('openai-gpt-3.5')
-  ? 'openai-gpt-3.5'
+export const defaultLLM = llms?.includes('openai-gpt-4o-mini')
+  ? 'openai-gpt-4o-mini'
   : llms?.includes('gemini-1.0-pro')
   ? 'gemini-1.0-pro'
   : 'diffbot';
