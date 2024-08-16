@@ -40,7 +40,7 @@
 
 
 # Step 1: Build the React application
-FROM node:18.16.0
+FROM node:18.16.0 AS build
 
 ARG BACKEND_API_URL="http://localhost:8000"
 ARG REACT_APP_SOURCES=""
