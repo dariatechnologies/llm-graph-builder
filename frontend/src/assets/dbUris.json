@@ -96,6 +96,15 @@
       "database": "neo4j",
       "name":"Neo4j Community"
     }
+  },
+  {
+    "be969307-6428-434a-9c53-7038afd74c65": {
+      "uri": "neo4j+s://353ac133.databases.neo4j.io",
+      "user": "neo4j",
+      "password": "i6L_GIBVzkWaQiUe46MMMxtPR3ZIbNNn-M-mMoCh-ec",
+      "database": "neo4j",
+      "name":"Soko Love Law"
+    }
   }
 
 ]

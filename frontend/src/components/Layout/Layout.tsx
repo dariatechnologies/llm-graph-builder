@@ -185,7 +185,7 @@ export default function Layout({
   };
   console.log(toggleLeftDrawer, 'toggleLeftDrawer');
 
-  const configurations = ["1653725a-f4b4-424d-9feb-eaf1554caaa0","aab8a855-a71e-4bde-98d4-2da5b6ec4cb2"]
+  const configurations = ["1653725a-f4b4-424d-9feb-eaf1554caaa0","aab8a855-a71e-4bde-98d4-2da5b6ec4cb2","be969307-6428-434a-9c53-7038afd74c65"]
   return (
     <Box sx={{ display: 'flex' }}>
       {/* <CssBaseline /> */}
