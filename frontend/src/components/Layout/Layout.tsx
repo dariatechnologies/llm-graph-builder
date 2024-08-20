@@ -184,6 +184,8 @@ export default function Layout({
     });
   };
   console.log(toggleLeftDrawer, 'toggleLeftDrawer');
+
+  const configurations = ["1653725a-f4b4-424d-9feb-eaf1554caaa0","aab8a855-a71e-4bde-98d4-2da5b6ec4cb2"]
   return (
     <Box sx={{ display: 'flex' }}>
       {/* <CssBaseline /> */}
@@ -249,7 +251,7 @@ export default function Layout({
               <ListItemText primary='Chat' sx={{ opacity: open ? 1 : 0 }} />
             </ListItemButton>
           </ListItem>
-          {uuid === 'aab8a855-a71e-4bde-98d4-2da5b6ec4cb2' && (
+          {configurations.includes(uuid) && (
             <ListItem
               disablePadding
               sx={{ display: 'block' }}
